@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform target;
 
+    public flaot smoothSpeed = 0.125f;
+    public Vector3 offset;
+    
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(target != null)
+        {
+            Vector3 desiredPosition = target.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp (transform.position, desiredPosition, smoothSpeed);
+            transform.position = smoothedPosition;
+        }
+        else
+        {
+            return;
+        }
     }
 }
